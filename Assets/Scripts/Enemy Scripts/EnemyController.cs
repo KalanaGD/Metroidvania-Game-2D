@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     private int _nextPoint;
 
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField]private float _jumpForce = 10f;
+    [SerializeField]private float _jumpForce = 5f;
 
     private float _waitTime = 2f;
     private float _waitCounter;
@@ -40,6 +40,10 @@ public class EnemyController : MonoBehaviour
 
             }
             //jump to high posiions
+            if (transform.position.y < _patrolPoints[_nextPoint].position.y -0.5f && _rb.velocity.y < 0.1f)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x,_jumpForce);
+            }
 
         }
         else // if point reached
