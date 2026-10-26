@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -11,6 +12,8 @@ public class BulletController : MonoBehaviour
     public GameObject _impactFx;
     public Vector2 _moveDirection;
 
+    public int _damageAmount = 1 ;
+
 
     void Update()
     {
@@ -18,8 +21,14 @@ public class BulletController : MonoBehaviour
 
     }
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyHealthManager>().DamageEnemy(_damageAmount);
+        }
+
         Instantiate(_impactFx, transform.position, quaternion.identity);
         Destroy(gameObject);
     }
