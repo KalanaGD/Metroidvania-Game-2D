@@ -14,7 +14,6 @@ public class EnemyHealthManager : MonoBehaviour
         {
             Destroy(gameObject);
             // damge FX
-            // get damge
         }
     }
 

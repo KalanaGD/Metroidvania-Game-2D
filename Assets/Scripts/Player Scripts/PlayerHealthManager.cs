@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static PlayerHealthManager instance;
+
+    private int _maxHealth = 10;
+    [SerializeField]private int _currenthealth;
+
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _currenthealth = _maxHealth;
     }
+
+    public void DamagePlayer(int _damageAmount)
+    {
+        _currenthealth -= _damageAmount;
+
+        if(_currenthealth <= 0)
+        {
+            _currenthealth = 0;
+            gameObject.SetActive(false);
+
+        }
+    }
+
+
 }
